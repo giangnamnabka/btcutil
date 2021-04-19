@@ -11,7 +11,7 @@ import (
 	"testing"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/giangnamnabka/btcd/chaincfg/chainhash"
+	"github.com/btcsuite/btcd/chaincfg/chainhash"
 	"github.com/giangnamnabka/btcutil"
 )
 

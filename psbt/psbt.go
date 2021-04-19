@@ -14,7 +14,7 @@ import (
 
 	"io"
 
-	"github.com/giangnamnabka/btcd/wire"
+	"github.com/btcsuite/btcd/wire"
 )
 
 // psbtMagicLength is the length of the magic bytes used to signal the start of
