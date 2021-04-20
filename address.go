@@ -5,11 +5,8 @@
 package btcutil
 
 import (
-	"bytes"
 	"encoding/hex"
 	"errors"
-	"fmt"
-	"strings"
 
 	"github.com/btcsuite/btcd/btcec"
 	"github.com/btcsuite/btcd/chaincfg"
