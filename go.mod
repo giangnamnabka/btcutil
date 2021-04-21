@@ -7,5 +7,5 @@ require (
 	golang.org/x/crypto v0.0.0-20200510223506-06a226fb4e37
 )
 
-// replace github.com/btcsuite/btcd => github.com/giangnamnabka/btcd v0.21.0-beta.0.20210420154044-49219d7c99f3
-replace github.com/btcsuite/btcd => github.com/giangnamnabka/btcd v0.21.0-beta.0.20210420162533-e2f30a2903ff
+// replace github.com/btcsuite/btcd@v0.21.0-beta => github.com/giangnamnabka/btcd v0.21.0-beta.0.20210420162533-e2f30a2903ff
+replace github.com/btcsuite/btcd@v0.21.0-beta => github.com/giangnamnabka/btcd v0.21.0-beta.0.20210421053028-91430c8dc7b0
