@@ -8,8 +8,8 @@ import (
 	"encoding/hex"
 	"errors"
 
-	"github.com/btcsuite/btcd/btcec"
-	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/giangnamnabka/btcd/btcec"
+	"github.com/giangnamnabka/btcd/chaincfg"
 	"github.com/giangnamnabka/btcutil/base58"
 	"golang.org/x/crypto/ripemd160"
 )
