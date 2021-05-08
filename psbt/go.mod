@@ -4,7 +4,7 @@ go 1.13
 
 require (
 	github.com/davecgh/go-spew v1.1.1
-	github.com/giangnamnabka/btcd v0.21.0-beta.0.20210422182616-7cc8292ed1fd
+	github.com/giangnamnabka/btcd v0.21.0-beta.0.20210508180704-81d6b80f4e66
 	github.com/giangnamnabka/btcutil v1.0.3-0.20210421053153-55ad5ef66f21
 )
 
