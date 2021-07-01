@@ -408,8 +408,8 @@ func NewFromSignedTx(tx *wire.MsgTx) (*Packet, [][]byte,
 	for i, tin := range tx2.TxIn {
 		tin.SignatureScript = nil
 		scriptSigs = append(scriptSigs, tx.TxIn[i].SignatureScript)
-		tin.Witness = nil
-		witnesses = append(witnesses, tx.TxIn[i].Witness)
+		// tin.Witness = nil
+		// witnesses = append(witnesses, tx.TxIn[i].Witness)
 	}
 
 	// Outputs always contain: (value, scriptPubkey) so don't need
