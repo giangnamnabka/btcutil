@@ -12,8 +12,8 @@ import (
 	"io"
 	"sort"
 
-	"github.com/giangnamnabka/btcd/txscript"
-	"github.com/giangnamnabka/btcd/wire"
+	"github.com/btcsuite/btcd/txscript"
+	"github.com/btcsuite/btcd/wire"
 )
 
 // WriteTxWitness is a utility function due to non-exported witness
@@ -301,6 +301,15 @@ func SumUtxoInputValues(packet *Packet) (int64, error) {
 			// the UTXO resides in.
 			utxOuts := in.NonWitnessUtxo.TxOut
 			txIn := packet.UnsignedTx.TxIn[idx]
+
+			// Check that utxOuts actually has enough space to
+			// contain the previous outpoint's index.
+			opIdx := txIn.PreviousOutPoint.Index
+			if opIdx >= uint32(len(utxOuts)) {
+				return 0, fmt.Errorf("input %d has malformed "+
+					"TxOut field", idx)
+			}
+
 			inputSum += utxOuts[txIn.PreviousOutPoint.Index].Value
 
 		default:
@@ -399,8 +408,8 @@ func NewFromSignedTx(tx *wire.MsgTx) (*Packet, [][]byte,
 	for i, tin := range tx2.TxIn {
 		tin.SignatureScript = nil
 		scriptSigs = append(scriptSigs, tx.TxIn[i].SignatureScript)
-		// tin.Witness = nil
-		// witnesses = append(witnesses, tx.TxIn[i].Witness)
+		tin.Witness = nil
+		witnesses = append(witnesses, tx.TxIn[i].Witness)
 	}
 
 	// Outputs always contain: (value, scriptPubkey) so don't need

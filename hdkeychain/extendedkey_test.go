@@ -17,7 +17,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/giangnamnabka/btcd/chaincfg"
+	"github.com/btcsuite/btcd/chaincfg"
 )
 
 // TestBIP0032Vectors tests the vectors provided by [BIP32] to ensure the

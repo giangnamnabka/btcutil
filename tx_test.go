@@ -10,9 +10,9 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/btcsuite/btcd/chaincfg/chainhash"
+	"github.com/btcsuite/btcutil"
 	"github.com/davecgh/go-spew/spew"
-	"github.com/giangnamnabka/btcd/chaincfg/chainhash"
-	"github.com/giangnamnabka/btcutil"
 )
 
 // TestTx tests the API for Tx.
@@ -102,7 +102,7 @@ func TestTxHasWitness(t *testing.T) {
 	tx := btcutil.NewTx(msgTx)
 
 	tx.WitnessHash() // Populate the witness hash cache
-	tx.HasWitness()  // Should not fail (see giangnamnabka/btcd#1543)
+	tx.HasWitness()  // Should not fail (see btcsuite/btcd#1543)
 
 	if !tx.HasWitness() {
 		t.Errorf("HasWitness: got false, want true")

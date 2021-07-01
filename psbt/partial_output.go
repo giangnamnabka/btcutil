@@ -5,7 +5,7 @@ import (
 	"io"
 	"sort"
 
-	"github.com/giangnamnabka/btcd/wire"
+	"github.com/btcsuite/btcd/wire"
 )
 
 // POutput is a struct encapsulating all the data that can be attached

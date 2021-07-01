@@ -14,7 +14,7 @@ import (
 
 	"io"
 
-	"github.com/giangnamnabka/btcd/wire"
+	"github.com/btcsuite/btcd/wire"
 )
 
 // psbtMagicLength is the length of the magic bytes used to signal the start of
@@ -137,7 +137,7 @@ type Packet struct {
 // is implicitly checked in the call to MsgTx.Deserialize().
 func validateUnsignedTX(tx *wire.MsgTx) bool {
 	for _, tin := range tx.TxIn {
-		if len(tin.SignatureScript) != 0 {
+		if len(tin.SignatureScript) != 0 || len(tin.Witness) != 0 {
 			return false
 		}
 	}

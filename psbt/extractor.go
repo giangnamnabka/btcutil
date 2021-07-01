@@ -10,7 +10,10 @@ package psbt
 // transaction.
 
 import (
-	"github.com/giangnamnabka/btcd/wire"
+	"bytes"
+
+	"github.com/btcsuite/btcd/txscript"
+	"github.com/btcsuite/btcd/wire"
 )
 
 // Extract takes a finalized psbt.Packet and outputs a finalized transaction
@@ -39,39 +42,39 @@ func Extract(p *Packet) (*wire.MsgTx, error) {
 			tin.SignatureScript = pInput.FinalScriptSig
 		}
 
-		// // Similarly, if there's a final witness, then we'll also need
-		// // to extract that as well, parsing the lower-level transaction
-		// // encoding.
-		// if pInput.FinalScriptWitness != nil {
-		// 	// In order to set the witness, need to re-deserialize
-		// 	// the field as encoded within the PSBT packet.  For
-		// 	// each input, the witness is encoded as a stack with
-		// 	// one or more items.
-		// 	witnessReader := bytes.NewReader(
-		// 		pInput.FinalScriptWitness,
-		// 	)
+		// Similarly, if there's a final witness, then we'll also need
+		// to extract that as well, parsing the lower-level transaction
+		// encoding.
+		if pInput.FinalScriptWitness != nil {
+			// In order to set the witness, need to re-deserialize
+			// the field as encoded within the PSBT packet.  For
+			// each input, the witness is encoded as a stack with
+			// one or more items.
+			witnessReader := bytes.NewReader(
+				pInput.FinalScriptWitness,
+			)
 
-		// 	// First we extract the number of witness elements
-		// 	// encoded in the above witnessReader.
-		// 	witCount, err := wire.ReadVarInt(witnessReader, 0)
-		// 	if err != nil {
-		// 		return nil, err
-		// 	}
+			// First we extract the number of witness elements
+			// encoded in the above witnessReader.
+			witCount, err := wire.ReadVarInt(witnessReader, 0)
+			if err != nil {
+				return nil, err
+			}
 
-		// 	// Now that we know how may inputs we'll need, we'll
-		// 	// construct a packing slice, then read out each input
-		// 	// (with a varint prefix) from the witnessReader.
-		// 	tin.Witness = make(wire.TxWitness, witCount)
-		// 	for j := uint64(0); j < witCount; j++ {
-		// 		wit, err := wire.ReadVarBytes(
-		// 			witnessReader, 0, txscript.MaxScriptSize, "witness",
-		// 		)
-		// 		if err != nil {
-		// 			return nil, err
-		// 		}
-		// 		tin.Witness[j] = wit
-		// 	}
-		// }
+			// Now that we know how may inputs we'll need, we'll
+			// construct a packing slice, then read out each input
+			// (with a varint prefix) from the witnessReader.
+			tin.Witness = make(wire.TxWitness, witCount)
+			for j := uint64(0); j < witCount; j++ {
+				wit, err := wire.ReadVarBytes(
+					witnessReader, 0, txscript.MaxScriptSize, "witness",
+				)
+				if err != nil {
+					return nil, err
+				}
+				tin.Witness[j] = wit
+			}
+		}
 	}
 
 	return finalTx, nil

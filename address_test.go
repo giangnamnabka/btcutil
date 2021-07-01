@@ -12,9 +12,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/giangnamnabka/btcd/chaincfg"
-	"github.com/giangnamnabka/btcd/wire"
-	"github.com/giangnamnabka/btcutil"
+	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/btcsuite/btcd/wire"
+	"github.com/btcsuite/btcutil"
 	"golang.org/x/crypto/ripemd160"
 )
 
@@ -858,6 +858,14 @@ func TestAddresses(t *testing.T) {
 				t.Errorf("%v: calculated network does not match expected",
 					test.name)
 				return
+			}
+		} else {
+			// If there is an error, make sure we can print it
+			// correctly.
+			errStr := err.Error()
+			if errStr == "" {
+				t.Errorf("%v: error was non-nil but message is"+
+					"empty: %v", test.name, err)
 			}
 		}
 
